@@ -1,8 +1,8 @@
+//Module gets the AMI ID by product code
 import {DescribeImagesCommand} from "@aws-sdk/client-ec2";
 import ec2Client from "./libs/ec2Client.js";
-
-// get the current Amazon Linux 2 AMIs
-export async function describeAMI(){
+// Function returns AMI ID
+const describeAMI = async () => {
     const params = {
         Filters: [
             {
@@ -13,7 +13,8 @@ export async function describeAMI(){
             },
         ]
     };
-
     const data = await ec2Client.send(new DescribeImagesCommand(params));
     return(data.Images[2].ImageId);
 }
+
+export default describeAMI;

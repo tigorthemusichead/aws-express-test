@@ -1,13 +1,10 @@
-import {
-    StopInstancesCommand
-} from "@aws-sdk/client-ec2";
+//Module stops selected instance (selected instances)
+import {StopInstancesCommand} from "@aws-sdk/client-ec2";
 import ec2Client from "./libs/ec2Client.js";
-
+// Function requires an object "params", which has to contain "instanceIDs" array
 const stopInstance = async (params) => {
         try {
-            const data = await ec2Client.send(new StopInstancesCommand(params));
-            console.log("Success", data.StoppingInstances);
-            return data;
+            return await ec2Client.send(new StopInstancesCommand(params));
         } catch (err) {
             console.log("Error", err);
         }
